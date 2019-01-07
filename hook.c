@@ -63,10 +63,10 @@ bool C_SaveName; ///< Config: Save outgoing message to mailbox of recipient's na
  */
 struct Hook
 {
-  HookFlags type;          ///< Hook type
-  struct Regex regex;      ///< Regular expression
-  char *command;           ///< Filename, command or pattern to execute
-  struct Pattern *pattern; ///< Used for fcc,save,send-hook
+  HookFlags type;              ///< Hook type
+  struct Regex regex;          ///< Regular expression
+  char *command;               ///< Filename, command or pattern to execute
+  struct PatternHead *pattern; ///< Used for fcc,save,send-hook
   TAILQ_ENTRY(Hook) entries;
 };
 static TAILQ_HEAD(, Hook) Hooks = TAILQ_HEAD_INITIALIZER(Hooks);
@@ -86,7 +86,7 @@ enum CommandResult mutt_parse_hook(struct Buffer *buf, struct Buffer *s,
   int rc;
   bool not = false, warning = false;
   regex_t *rx = NULL;
-  struct Pattern *pat = NULL;
+  struct PatternHead *pat = NULL;
   char path[PATH_MAX];
 
   mutt_buffer_init(&pattern);
